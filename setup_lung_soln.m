@@ -2,7 +2,7 @@
 %heterogeneity parameter (0<=beta<=1):
 %beta=0 for homogenous lung
 %beta=1 for no ventilation/perfusion correlation
-beta=0.5
+% beta=0.5
 %
 %number of iterations used in bisection:
 maxcount=20
@@ -25,7 +25,7 @@ cstar=cref
 %in blood expressed in moles/liter)
 %
 %rate of oxygen consumption (moles/minute):
-M=0.25*cref*5.6
+% M=0.25*cref*5.6
 %
 %oxygen partial pressure 
 %at which hemoglobin is half-saturated:
@@ -56,21 +56,12 @@ VAbar=VAtotal/n
 %
 %expected perfusion per alveolus: 
 Qbar=Qtotal/n 
-%
-%random initialization 
-%of ventilation and perfusion:
-%create two independent vectors 
-%of exponential random variables 
-%with mean 1:
+
 a1=-log(rand(n,1));
 a2=-log(rand(n,1));
 av=(a1+a2)/2;        
-%components of av have mean 1
-%and distribution like t*exp(-t).
 VA=VAbar*(a1*beta+av*(1-beta));
 Q = Qbar*(a2*beta+av*(1-beta));
-%when beta=0, VA and Q are in a fixed proportion 
-%when beta=1, VA and Q are independent
 r=VA./Q;
 figure(1)
 plot(Q,VA,'.')
